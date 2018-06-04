@@ -1,0 +1,8 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <string-array name="type">
+        <item>学习相关</item>
+        <item>生活用品</item>
+        <item>其它</item>
+    </string-array>
+</resources>
