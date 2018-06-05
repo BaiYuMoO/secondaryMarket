@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -50,6 +51,7 @@ import cn.bmob.v3.listener.UploadBatchListener;
 public class MyFragment extends Fragment implements View.OnClickListener {
     private View view;
     private Button btn_my_login, btn_layout;
+    private TextView tv_hint;
     private CircleImageView img_buddha;
     private LinearLayout my_linear_goods, my_linear_history, my_linear_about, my_linear_settings;
     private SharedPreferences sp;
@@ -113,6 +115,7 @@ public class MyFragment extends Fragment implements View.OnClickListener {
 
     //开启选择图片视图
     private void openImg() {
+        path.clear();
         ImageConfig imageConfig = new ImageConfig.Builder(// GlideLoader 可用自己用的缓存库
                 new GlideLoader())
                 // 如果在 4.4 以上，则修改状态栏颜色 （默认黑色）
@@ -203,6 +206,8 @@ public class MyFragment extends Fragment implements View.OnClickListener {
                         @Override
                         public void done(BmobException e) {
                             if (e == null) {
+                                tv_hint.setText("");
+                                img_buddha.setClickable(true);
                                 getBuddha();
                             } else {
                                 Toast.makeText(getActivity(), "上传头像失败，请检查网络", Toast.LENGTH_SHORT).show();
@@ -212,13 +217,15 @@ public class MyFragment extends Fragment implements View.OnClickListener {
                 }
 
                 @Override
-                public void onProgress(int i, int i1, int i2, int i3) {
-
+                public void onProgress(int curIndex, int curPercent, int total, int totalPercent) {
+                    img_buddha.setClickable(false);
+                    tv_hint.setText("正在上传头像" + curPercent + "%");
                 }
 
                 @Override
                 public void onError(int i, String s) {
-
+                    tv_hint.setText("");
+                    img_buddha.setClickable(true);
                 }
             });
         }
@@ -237,6 +244,7 @@ public class MyFragment extends Fragment implements View.OnClickListener {
     private void initView() {
         img_buddha = view.findViewById(R.id.my_img_buddha);
         btn_my_login = view.findViewById(R.id.btn_my_login);
+        tv_hint = view.findViewById(R.id.my_tv_hint);
         my_linear_goods = view.findViewById(R.id.my_linear_goods);
         my_linear_history = view.findViewById(R.id.my_linear_history);
         my_linear_about = view.findViewById(R.id.my_linear_about);

@@ -11,21 +11,34 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="160dp"
             android:gravity="center_vertical"
             android:background="@drawable/my_img_bg"
             android:orientation="horizontal">
 
+            <LinearLayout
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
             <com.xw.h2market.util.CircleImageView
                 android:id="@+id/my_img_buddha"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:layout_margin="30dp"
+                android:layout_margin="20dp"
                 android:src="@drawable/ic_buddha"
                 app:civ_border_width="2dp"
                 app:civ_border_color="#e3e3e3"
                 />
-
+                <TextView
+                    android:id="@+id/my_tv_hint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:textColor="#e3e3e3"
+                    />
+            </LinearLayout>
             <Button
                 android:id="@+id/btn_my_login"
                 android:layout_width="wrap_content"
