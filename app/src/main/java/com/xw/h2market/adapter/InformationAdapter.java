@@ -64,8 +64,10 @@ public class InformationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         MyImageLoader.imgLoader.displayImage(information.getImg1().getUrl(), viewholder.img_preview);
         if (information.getSell_and_buy().equals("出售")) {
             viewholder.img_type.setImageResource(R.drawable.goods_cs);
-        } else {
+        } else if(information.getSell_and_buy().equals("求购")){
             viewholder.img_type.setImageResource(R.drawable.goods_qg);
+        }else{
+            viewholder.img_type.setImageResource(R.drawable.goods_ys);
         }
         if (information.getChaffer().equals("可小刀")) {
             viewholder.tv_chaffer.setSelected(true);

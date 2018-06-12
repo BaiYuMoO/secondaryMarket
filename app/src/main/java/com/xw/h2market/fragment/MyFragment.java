@@ -20,7 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.xw.h2market.GlideLoader;
+import com.xw.h2market.util.GlideLoader;
 import com.xw.h2market.LoginActivity;
 import com.xw.h2market.MyAboutActivity;
 import com.xw.h2market.MyGoodsActivity;
@@ -108,6 +108,7 @@ public class MyFragment extends Fragment implements View.OnClickListener {
                 editor.commit();
                 btn_my_login.setText("点击登录");
                 btn_layout.setVisibility(View.INVISIBLE);
+                img_buddha.setImageResource(R.drawable.ic_buddha);
                 Toast.makeText(getActivity(), "注销成功", Toast.LENGTH_SHORT).show();
                 break;
         }
@@ -169,14 +170,20 @@ public class MyFragment extends Fragment implements View.OnClickListener {
     private void getBuddha() {
         String id = sp.getString("id", null);
         if (id == null) {
+            img_buddha.setImageResource(R.drawable.ic_buddha);
         } else {
             BmobQuery<User> query = new BmobQuery<>();
             query.getObject(id, new QueryListener<User>() {
                 @Override
                 public void done(User user, BmobException e) {
                     if (e == null) {
-                        Glide.with(getActivity()).load(user.getBuddha().getUrl()).into(img_buddha);
+                        if (user.getBuddha().getUrl() != null) {
+                            Glide.with(getActivity()).load(user.getBuddha().getUrl()).into(img_buddha);
+                        } else {
+                            img_buddha.setImageResource(R.drawable.ic_buddha);
+                        }
                     } else if (e.getErrorCode() == 9015) {
+                        img_buddha.setImageResource(R.drawable.ic_buddha);
                     } else {
                         Toast.makeText(getActivity(), "获取头像失败，请检查网络设置", Toast.LENGTH_SHORT).show();
                     }

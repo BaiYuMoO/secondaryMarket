@@ -30,6 +30,7 @@ import android.widget.Toast;
 
 import com.xw.h2market.adapter.ImageAdapter;
 import com.xw.h2market.pojo.Information;
+import com.xw.h2market.util.GlideLoader;
 import com.yancy.imageselector.ImageConfig;
 import com.yancy.imageselector.ImageSelector;
 import com.yancy.imageselector.ImageSelectorActivity;
@@ -296,10 +297,10 @@ public class IssueActivity extends AppCompatActivity implements View.OnClickList
                 int p = 1;
 
                 @Override
-                public void onSuccess(List<BmobFile> list, List<String> list1) {
+                public void onSuccess(List<BmobFile> files, List<String> urls) {
                     //1、files-上传完成后的BmobFile集合，是为了方便大家对其上传后的数据进行操作，例如你可以将该文件保存到表中
                     //2、urls-上传文件的完整url地址
-                    information.setValue("img" + p, list.get(position));
+                    information.setValue("img" + p, files.get(position));
                     information.update(information.getObjectId(), new UpdateListener() {
                         @Override
                         public void done(BmobException e) {

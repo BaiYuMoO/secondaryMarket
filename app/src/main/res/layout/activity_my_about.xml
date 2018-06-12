@@ -123,6 +123,15 @@
                 android:text="      QQ:1209161060"
                 android:textColor="#555555"
                 android:textSize="18sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="      邮箱:1209161060@qq.com"
+                android:textColor="#555555"
+                android:textSize="18sp"
+                android:autoLink="email"
+                />
         </LinearLayout>
 
     </LinearLayout>

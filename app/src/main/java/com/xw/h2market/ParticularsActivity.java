@@ -283,12 +283,12 @@ public class ParticularsActivity extends AppCompatActivity implements View.OnCli
         int id = item.getItemId();
         if (id == R.id.menu_delete) {
             Information infor = new Information();
-            infor.setObjectId(inforId);
-            infor.delete(new UpdateListener() {
+            infor.setValue("sell_and_buy","已售");
+            infor.update(inforId,new UpdateListener() {
                 @Override
                 public void done(BmobException e) {
                     if (e == null) {
-                        Toast.makeText(ParticularsActivity.this, "删除成功", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ParticularsActivity.this, "标记已售成功", Toast.LENGTH_SHORT).show();
                         finish();
                     } else {
                         Log.e("xx", e.getMessage());
